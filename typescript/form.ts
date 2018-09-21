@@ -28,7 +28,7 @@ but.onclick = function() {
     var phone_number: string = document.forms["form"]["phone-number"].value
     var fname: string = document.forms["form"]["fname"].value
     var lname: string = document.forms["form"]["lname"].value
-    var age: string = document.forms["form"]["age"].value
+    var age: number = document.forms["form"]["age"].value
     var birth_month: string = document.forms["form"]["birth-month"].value
     var birth_day: number = document.forms["form"]["birth-day"].value
     var birth_year: number = document.forms["form"]["birth-year"].value
@@ -85,7 +85,7 @@ function chkpwd(pwd: string): boolean {
     }
 
     function chkpwdcon(pwdcon: string, pwd: string): boolean {
-        if(pwdcon.length<8 || pwdcon.length!==pwd.length) return false
+        if(pwdcon.length!==pwd.length) return false
         for (var i = 0; i < pwd.length; i++) {
             if (pwdcon.charAt(i) !== pwd.charAt(i))
                 return false
@@ -129,13 +129,13 @@ function chkpwd(pwd: string): boolean {
         }
         return false
     }
-    function chkage(age: string): boolean {
+    function chkage(age: number): boolean {
         
-        return age!=='' && Number(age) >= 0 && Number(age)<=200
+        return (age) >= 0 && (age)<=200
     }
 
     function chkdate(date: number): boolean {
-        return date >= 1 && date <= 99
+        return date >= 0 && date <= 99
     }
 
     function chkyear(year: number): boolean {

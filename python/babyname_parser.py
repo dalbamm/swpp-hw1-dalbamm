@@ -89,7 +89,7 @@ class BabynameParser:
         infile.seek(0)
         textline = infile.readline()
         while textline !='':
-            if textline.startswith('<tr align="right"') & textline.endswith('</td>\n'):
+            if textline.startswith('<tr align="right"><td>') & textline.endswith('</td>\n'):
                 textline = textline.replace('</td>',',')
                 textline = textline.replace('<td>','')
                 textline = textline.replace('<tr align="right">','')
