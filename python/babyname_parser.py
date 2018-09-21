@@ -114,7 +114,6 @@ class BabynameParser:
         """
         # TODO: Implement this method.
         rst=[]
-        of = open('out.txt','wt')
         for i in self.rank_to_names_tuples:
             rst.append(parsing_lambda(i))
         return rst
