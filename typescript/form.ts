@@ -162,6 +162,18 @@ function chkpwd(pwd: string): boolean {
         'Must be one of "January", "February", ..., "December"',
         'Must be a number of one or two digits.',
         'Must be a number between 1800 and 2018 (inclusive).']
+    let listk: string[] = [
+        'email-label',
+'password-label',
+'password-confirmation-label',
+'phone-number-label',
+'fname-label',
+'lname-label',
+'age-label',
+'birth-month-label',
+'birth-day-label',
+'birth-year-label'
+    ]
     var rst: string = ''
         
     for (var i = 0; i < errorlist.length; ++i) {
@@ -170,7 +182,7 @@ function chkpwd(pwd: string): boolean {
     }
     let Xlisthtml: any[] =[]
     for (var i = 0; i < errorlist.length; ++i) {
-        Xlisthtml.push(document.getElementById('X' + i))
+        Xlisthtml.push(document.getElementById(listk[i]))
         //Xlisthtml[i] = document.getElementById('X' + i)
         if (!errorlist[i]) {
             var icon = Xlisthtml[i]
@@ -190,3 +202,11 @@ function chkpwd(pwd: string): boolean {
     // Hint: Ask Google to do things you don't know yet! There should be others who have already done what you are to encounter.
 }
 document.body.appendChild(but)
+
+
+/*
+var but = document.createElement('button')
+but.innerHTML = "Check"
+but.onclick = function() {
+    var email: string = document.forms["form"]["email"].value
+    // TODO: Fill in the rest of the*/
