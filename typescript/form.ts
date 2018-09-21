@@ -1,3 +1,4 @@
+
 class Form {
     constructor(
         public email: string,
@@ -11,7 +12,8 @@ class Form {
         public birth_day: number,
         public birth_year: number) {}
     // TODO: You may fill in functions in the class.
-
+    ngOnInit() {
+    }
 }
 
 var but = document.createElement('button')
@@ -26,7 +28,7 @@ but.onclick = function() {
     var phone_number: string = document.forms["form"]["phone-number"].value
     var fname: string = document.forms["form"]["fname"].value
     var lname: string = document.forms["form"]["lname"].value
-    var age: number = document.forms["form"]["age"].value
+    var age: string = document.forms["form"]["age"].value
     var birth_month: string = document.forms["form"]["birth-month"].value
     var birth_day: number = document.forms["form"]["birth-day"].value
     var birth_year: number = document.forms["form"]["birth-year"].value
@@ -43,7 +45,6 @@ but.onclick = function() {
     console.log('10: '+birth_year)
     
     var form : Form
-    var flag = false
 
     function chkem(em: string): boolean {
         let tmp: string[] = em.split('@')
@@ -62,7 +63,7 @@ but.onclick = function() {
 
         if (dom.length < 2 || dom.length > 3) return false
         for (var i = 0; i < dom.length; ++i) {
-            var cri = dom[i]
+            var cri = dom[i] 
             if('a'>cri || 'z'<cri)  return false
         }
         
@@ -84,7 +85,7 @@ function chkpwd(pwd: string): boolean {
     }
 
     function chkpwdcon(pwdcon: string, pwd: string): boolean {
-        if(pwdcon.length<8) return false
+        if(pwdcon.length<8 || pwdcon.length!==pwd.length) return false
         for (var i = 0; i < pwd.length; i++) {
             if (pwdcon.charAt(i) !== pwd.charAt(i))
                 return false
@@ -128,8 +129,9 @@ function chkpwd(pwd: string): boolean {
         }
         return false
     }
-    function chkage(age: number): boolean {
-        return age>=0 && age<=200
+    function chkage(age: string): boolean {
+        
+        return age!=='' && Number(age) >= 0 && Number(age)<=200
     }
 
     function chkdate(date: number): boolean {
@@ -150,16 +152,38 @@ function chkpwd(pwd: string): boolean {
         [    'Email',    'Password',    'Password Confirmation',    'Phone number',    'First Name',
     'Last Name', 'Age',      'Month', 'Day',    'Year' ]
 
+    let ttiplist: string[] = ['characters@characters.domain (characters other than @ or whitespace followed by an @ sign, followed by more characters (not \'@\', \'.\', or whitespace: co.kr is not allowed in this case), and then a ".". After the ".", you can only write 2 to 3 letters from a to z).',
+        'Must contain at least one number and one uppercase and one lowercase letter, and at least 8 or more characters.',
+        'Must match password.',
+        'nnn-nnnn-nnnn: three numbers, then "-", followed by four numbers and a "-", then four numbers.',
+        'Start with a capital letter, followed by one or more lowercase letters. Should only contain alphabets (A-Z, a-z)',
+        'Start with a capital letter, followed by one or more lowercase letters. Should only contain alphabets (A-Z, a-z)',
+        'Must be a number between 0 and 200 (inclusive).',
+        'Must be one of "January", "February", ..., "December"',
+        'Must be a number of one or two digits.',
+        'Must be a number between 1800 and 2018 (inclusive).']
     var rst: string = ''
-
+        
     for (var i = 0; i < errorlist.length; ++i) {
         if (!errorlist[i])
             rst+=infolist[i]+'\n'
     }
-    
-    alertMessage = rst==='' ? 'Successfully Submitted!' : 'You must correct:\n\n'+rst;
+    let Xlisthtml: any[] =[]
+    for (var i = 0; i < errorlist.length; ++i) {
+        Xlisthtml.push(document.getElementById('X' + i))
+        //Xlisthtml[i] = document.getElementById('X' + i)
+        if (!errorlist[i]) {
+            var icon = Xlisthtml[i]
+            icon.innerHTML = 'X'
+            icon.title=ttiplist[i]
+        }
+        else 
+            Xlisthtml[i].innerHTML = ''
+        //console.log(Xlisthtml[i])
+
+    }
+    alertMessage = rst === '' ? 'Successfully Submitted!' : 'You must correct:\n\n' + rst;
     alert(alertMessage);
-    
     // Hint: you can use the RegExp class for matching a string with the `test` method.
     // Hint: you can set contents of elements by finding it with `document.getElementById`, and fixing the `innerHTML`.
     // Hint: modify 'title' attribute of each label to display your message
