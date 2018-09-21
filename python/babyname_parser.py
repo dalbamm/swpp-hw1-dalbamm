@@ -103,7 +103,7 @@ class BabynameParser:
 
     def parse(self, parsing_lambda):
         """
-        Collects a list of babynames parsed from the (rank, male-name, female-name) tuples.
+        Collects a list of babyname s parsed from the (rank, male-name, female-name) tuples.
         The list must contains all results processed with the given lambda.
 
         Args:
@@ -113,3 +113,8 @@ class BabynameParser:
             The list of parsed babynames.
         """
         # TODO: Implement this method.
+        rst=[]
+        of = open('out.txt','wt')
+        for i in self.rank_to_names_tuples:
+            rst.append(parsing_lambda(i))
+        return rst
